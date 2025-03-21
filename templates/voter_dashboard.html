@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voting Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+/* Welcome Header with Unique Color */
+.welcome-header {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 26px;
+    font-weight: bold;
+    color: white;
+    background: #3674B5; /* Dark Blue */
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    animation: pulse 1.5s infinite alternate;
+}
+
+/* Medium-Sized Table */
+.candidates-table {
+    width: 70%;
+    margin: 15px auto;
+    border-collapse: collapse;
+    background: #D1F8EF; /* Soft Cyan */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Header */
+.candidates-table th {
+    background: #578FCA; /* Medium Blue */
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    padding: 12px;
+}
+
+/* Table Cells */
+.candidates-table td {
+    background: #A1E3F9; /* Light Blue */
+    color: #333;
+    font-size: 16px;
+    padding: 12px;
+    border: 1px solid #578FCA;
+}
+
+.candidates-table tr:nth-child(even) {
+    background: rgba(209, 248, 239, 0.7); /* Softer Cyan */
+}
+
+.candidates-table tr:hover {
+    background: #3674B5;
+    color: white;
+    transform: scale(1.02);
+    transition: 0.3s ease-in-out;
+}
+
+/* Party Symbol */
+.party-symbol {
+    max-width: 80px;
+    max-height: 80px;
+    display: block;
+    margin: 8px auto;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Vote Button */
+.vote-button {
+    text-align: center;
+    margin-top: 15px;
+}
+
+input[type="radio"] {
+    transform: scale(1.8);
+    margin: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input[type="radio"]:hover {
+    transform: scale(2);
+    filter: drop-shadow(0 0 5px #578FCA);
+}
+
+input[type="radio"]:checked {
+    filter: hue-rotate(180deg) brightness(1.2);
+}
+
+/* Vote Button */
+.vote-button button {
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #2575fc, #6a11cb); /* Dark Blue */
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.vote-button button:hover {
+    background: linear-gradient(90deg, #6a11cb,#2575fc); /* Medium Blue */
+    transform: scale(1.05);
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Candidate Name Styling */
+.candidate-name {
+    font-weight: bold;
+    font-size: 18px;
+    color: #3674B5; /* Dark Blue */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 8px rgba(54, 116, 181, 0.6);
+    }
+    100% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(54, 116, 181, 1);
+    }
+}
+
+
+    </style>
+    
+</head>
+<body>
+    <div class="voting-container">
+        <div class="welcome-header">
+            <h2>Welcome, {{ session.voter_name }}</h2>
+            <p>Place: {{ session.place }}</p>
+        </div>
+
+        <form action="{{ url_for('vote') }}" method="POST">
+            <table class="candidates-table">
+                <thead>
+                    <tr>
+                        
+                        <th>Candidate Name</th>
+                        <th>Party Symbol</th>
+                        <th>Select</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for candidate in candidates %}
+                    <tr>
+                        
+                        <td class="candidate-name">{{ candidate.name }}</td>
+                        <td>
+                            {% if candidate.party_symbol %}
+                            <img class="party-symbol" 
+                                 src="{{ url_for('static', filename=candidate.party_symbol) }}" 
+                                 alt="{{ candidate.name }} Party Symbol">
+                            {% else %}
+                            <span>No Symbol</span>
+                            {% endif %}
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="candidate" value="{{ candidate.id }}" required 
+                                   style="transform: scale(2); margin: 10px; vertical-align: middle;">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="vote-button">
+                <button type="submit">Submit Vote</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

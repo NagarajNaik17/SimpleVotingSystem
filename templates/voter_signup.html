@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Registration</title>
+    <style>
+        /* General page styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Signup container */
+        .signup-container {
+            background: rgb(161, 227, 249);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        /* Headings */
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Flash message styling */
+        .alert {
+            background: #ffdddd;
+            color: #d9534f;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        /* Form elements */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Stylish register button */
+        button {
+            width: 100%;
+            background: linear-gradient(90deg, #2575fc, #6a11cb);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+        }
+
+        /* Login link */
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .login-link a {
+            color: #e52e71;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Voter Registration</h2>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST">
+            <div class="form-group">
+                <label>Full Name:</label>
+                <input type="text" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Voter ID:</label>
+                <input type="text" name="voter_id" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" name="password" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Place/Constituency:</label>
+                <input type="text" name="place" required>
+            </div>
+            
+            <button type="submit">Register</button>
+        </form>
+        
+        <p class="login-link">Already registered? <a href="{{ url_for('voter_login') }}">Login here</a></p>
+    </div>
+</body>
+</html>

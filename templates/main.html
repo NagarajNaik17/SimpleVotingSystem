@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Voting System</title>
+</head>
+<body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f0f2f5;">
+    <div style="text-align: center; padding: 30px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1); background-color: white;">
+        <h1 style="color: #1a73e8; margin-bottom: 40px;">Digital Voting System</h1>
+        
+        <div style="display: flex; gap: 20px; justify-content: center;">
+            <a href="{{ url_for('voter_login') }}" 
+               style="text-decoration: none; 
+                      padding: 15px 30px; 
+                      background-color: #1a73e8; 
+                      color: white; 
+                      border-radius: 5px; 
+                      font-size: 18px;
+                      transition: background-color 0.3s;
+                      border: none;
+                      cursor: pointer;">
+                Voter Login
+            </a>
+            
+            <a href="{{ url_for('officer_login') }}" 
+               style="text-decoration: none; 
+                      padding: 15px 30px; 
+                      background-color: #34a853; 
+                      color: white; 
+                      border-radius: 5px; 
+                      font-size: 18px;
+                      transition: background-color 0.3s;
+                      border: none;
+                      cursor: pointer;">
+                Election Officer
+            </a>
+        </div>
+    </div>
+</body>
+</html>

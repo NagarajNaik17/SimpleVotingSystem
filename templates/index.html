@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Voting System</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="landing-container">
+        <h1>Welcome to Digital Voting System</h1>
+        <div class="options">
+            <a href="{{ url_for('officer_login') }}" class="btn">Election Officer Login</a>
+            <a href="{{ url_for('voter_signup') }}" class="btn">Voter Registration</a>
+            <a href="{{ url_for('voter_login') }}" class="btn">Voter Login</a>
+        </div>
+    </div>
+</body>
+</html>
